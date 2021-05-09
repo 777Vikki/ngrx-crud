@@ -8,7 +8,7 @@ import { map, mergeMap, catchError } from "rxjs/operators";
 import { EmployeeService } from "../employee.service";
 import * as employeeActions from "./employee.actions";
 import { IEmployee } from "../models/employee.model";
-import { EmployeeState } from "./employee.state";
+import { EmployeeActionsType } from './employee-action.enum';
 
 @Injectable()
 export class EmployeeEffect {
@@ -19,7 +19,7 @@ export class EmployeeEffect {
     @Effect()
     loadEmployees$: Observable<Action> = this.actions$.pipe(
         ofType<employeeActions.LoadEmployees>(
-            employeeActions.EmployeeActionsType.LOAD_EMPLOYEES
+            EmployeeActionsType.LOAD_EMPLOYEES
         ),
         mergeMap((actions: employeeActions.LoadEmployees) =>
             this.employeeService.getEmployee().pipe(

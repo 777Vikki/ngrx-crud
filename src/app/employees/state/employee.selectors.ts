@@ -1,6 +1,6 @@
 import { createSelector, createFeatureSelector } from '@ngrx/store'
 import { EmployeeState } from './employee.state';
-import { employeeAdapter } from './employee.reducer';
+import { employeeAdapter } from './employee-action.enum';
 
 const getEmployeeFeatureState = createFeatureSelector<EmployeeState>(
     "employees"

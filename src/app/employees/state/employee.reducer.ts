@@ -1,7 +1,6 @@
 import * as employeeActions from './employee.actions';
 import { EmployeeState } from './employee.state';
-import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
-import { IEmployee } from '../models/employee.model';
+import { EmployeeActionsType, employeeAdapter } from './employee-action.enum';
 export const defaultCustomer: EmployeeState = {
     employees: [],
     entities: {},
@@ -12,16 +11,12 @@ export const defaultCustomer: EmployeeState = {
     error: ''
 };
 
-export const employeeAdapter: EntityAdapter<IEmployee> = createEntityAdapter<
-    IEmployee
->();
-
 export const initialState = employeeAdapter.getInitialState(defaultCustomer);
 
 export const employeeReducer = (state = initialState, action: employeeActions.Actions): EmployeeState => {
     switch (action.type) {
 
-        case employeeActions.EmployeeActionsType.LOAD_EMPLOYEES_SUCCESS: {
+        case EmployeeActionsType.LOAD_EMPLOYEES_SUCCESS: {
             return employeeAdapter.addMany(action.payload, {
                 ...state,
                 loading: false,
@@ -29,7 +24,7 @@ export const employeeReducer = (state = initialState, action: employeeActions.Ac
             });
         }
 
-        case employeeActions.EmployeeActionsType.LOAD_EMPLOYEES_FAIL: {
+        case EmployeeActionsType.LOAD_EMPLOYEES_FAIL: {
             return {
                 ...state,
                 employees: [],
@@ -39,7 +34,7 @@ export const employeeReducer = (state = initialState, action: employeeActions.Ac
             }
         }
 
-        case employeeActions.EmployeeActionsType.LOAD_EMPLOYEE: {
+        case EmployeeActionsType.LOAD_EMPLOYEE: {
             return {
                 ...state,
                 loading: true,
@@ -47,15 +42,15 @@ export const employeeReducer = (state = initialState, action: employeeActions.Ac
             }
         }
 
-        case employeeActions.EmployeeActionsType.UPDATE_EMPLOYEE: {
+        case EmployeeActionsType.UPDATE_EMPLOYEE: {
             return employeeAdapter.updateOne(action.payload, state);
         }
 
-        case employeeActions.EmployeeActionsType.DELETE_EMPLOYEE: {
+        case EmployeeActionsType.DELETE_EMPLOYEE: {
             return employeeAdapter.removeOne(action.payload, state)
         }
 
-        case employeeActions.EmployeeActionsType.CREATE_EMPLOYEE: {
+        case EmployeeActionsType.CREATE_EMPLOYEE: {
             return employeeAdapter.addOne(action.payload, state);
         }
         default: {
