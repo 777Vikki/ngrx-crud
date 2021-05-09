@@ -1,26 +1,26 @@
 import { createSelector, createFeatureSelector } from '@ngrx/store'
 import { EmployeeState } from './employee.state';
 
-const getCustomerFeatureState = createFeatureSelector<EmployeeState>(
+const getEmployeeFeatureState = createFeatureSelector<EmployeeState>(
     "employees"
 );
 
 export const getEmployees = createSelector(
-    getCustomerFeatureState,
+    getEmployeeFeatureState,
     (state: EmployeeState) => state.employees
 );
 
 export const getEmployeesLoading = createSelector(
-    getCustomerFeatureState,
+    getEmployeeFeatureState,
     (state: EmployeeState) => state.loading
 );
 
 export const getEmployeesLoaded = createSelector(
-    getCustomerFeatureState,
+    getEmployeeFeatureState,
     (state: EmployeeState) => state.loaded
 );
 
 export const getError = createSelector(
-    getCustomerFeatureState,
+    getEmployeeFeatureState,
     (state: EmployeeState) => state.error
 );
