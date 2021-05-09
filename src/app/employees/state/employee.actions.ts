@@ -45,7 +45,7 @@ export class CreateEmployee implements Action {
 }
 
 
-export type Actions =
+export type EmloyeeAction =
     | LoadEmployees
     | LoadEmployeesSuccess
     | LoadEmployeesFail

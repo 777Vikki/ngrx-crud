@@ -13,7 +13,7 @@ export const defaultCustomer: EmployeeState = {
 
 export const initialState = employeeAdapter.getInitialState(defaultCustomer);
 
-export const employeeReducer = (state = initialState, action: employeeActions.Actions): EmployeeState => {
+export const employeeReducer = (state = initialState, action: employeeActions.EmloyeeAction): EmployeeState => {
     switch (action.type) {
 
         case EmployeeActionsType.LOAD_EMPLOYEES_SUCCESS: {
