@@ -7,8 +7,9 @@ import { EmployeeEditComponent } from './employee-edit/employee-edit.component';
 import { EmployeeAddComponent } from './employee-add/employee-add.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { StoreModule } from '@ngrx/store';
-import { customerReducer } from './state/customer.reducer';
-
+import { employeeReducer } from './state/employee.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { CustomerEffect } from './state/customer.effects';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { customerReducer } from './state/customer.reducer';
   imports: [
     CommonModule,
     EmployeesRoutingModule,
-    StoreModule.forFeature("employees", customerReducer)
+    StoreModule.forFeature("employees", employeeReducer),
+    EffectsModule.forFeature([CustomerEffect])
   ]
 })
 export class EmployeesModule { }

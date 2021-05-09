@@ -8,11 +8,11 @@ import { IEmployee } from './models/employee.model';
   providedIn: 'root'
 })
 export class EmployeeService {
-
+  employeesUrl = 'https://reqres.in/api/users?page=1';
   constructor(private http: HttpClient) { }
 
-  getEmployee(): Observable<any> {
-    return this.http.get<{ data: IEmployee[] }>('https://reqres.in/api/users?page=1')
+  getEmployee(): Observable<IEmployee[]> {
+    return this.http.get<{ data: IEmployee[] }>(this.employeesUrl)
       .pipe(map(d => d.data || []))
   }
 }
