@@ -16,8 +16,8 @@
             <td>{{emp.last_name}}</td>
             <td><img [src]="emp.avatar" alt=""></td>
             <td>
-                <span style="display: block;"><a style="cursor: pointer;">edit</a></span>
-                <span style="display: block;"><a style="cursor: pointer;">delete</a></span>
+                <span style="display: block;"><a style="cursor: pointer;" (click)="edit(emp)">edit</a></span>
+                <span style="display: block;"><a style="cursor: pointer;" (click)="delete(emp)">delete</a></span>
             </td>
         </tr>
     </tbody>

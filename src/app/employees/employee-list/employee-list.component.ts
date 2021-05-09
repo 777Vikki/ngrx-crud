@@ -19,4 +19,12 @@ export class EmployeeListComponent implements OnInit {
     this.employees$ =  this.store.pipe(select(fromEmployee.getEmployees));
   }
 
+  edit(employee: IEmployee): void {
+    this.store.dispatch(new employeeActions.LoadEmployee(employee.id))
+  }
+
+  delete(employee: IEmployee): void {
+    this.store.dispatch(new employeeActions.DeleteEmployee(employee.id))
+  }
+
 }

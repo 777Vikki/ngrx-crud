@@ -1,5 +1,6 @@
 import { createSelector, createFeatureSelector } from '@ngrx/store'
 import { EmployeeState } from './employee.state';
+import { employeeAdapter } from './employee.reducer';
 
 const getEmployeeFeatureState = createFeatureSelector<EmployeeState>(
     "employees"
@@ -7,7 +8,7 @@ const getEmployeeFeatureState = createFeatureSelector<EmployeeState>(
 
 export const getEmployees = createSelector(
     getEmployeeFeatureState,
-    (state: EmployeeState) => state.employees
+    employeeAdapter.getSelectors().selectAll
 );
 
 export const getEmployeesLoading = createSelector(
@@ -23,4 +24,15 @@ export const getEmployeesLoaded = createSelector(
 export const getError = createSelector(
     getEmployeeFeatureState,
     (state: EmployeeState) => state.error
+);
+
+export const getCurrentCustomerId = createSelector(
+    getEmployeeFeatureState,
+    (state: EmployeeState) => state.selectedEmployeeId
+);
+
+export const getCurrentCustomer = createSelector(
+    getEmployeeFeatureState,
+    getCurrentCustomerId,
+    state => state.entities[state.selectedEmployeeId]
 );

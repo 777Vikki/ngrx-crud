@@ -8,6 +8,8 @@ import { map, mergeMap, catchError } from "rxjs/operators";
 import { EmployeeService } from "../employee.service";
 import * as employeeActions from "./employee.actions";
 import { IEmployee } from "../models/employee.model";
+import { EmployeeState } from "./employee.state";
+
 @Injectable()
 export class EmployeeEffect {
     constructor(private actions$: Actions,
@@ -15,18 +17,20 @@ export class EmployeeEffect {
     ) { }
 
     @Effect()
-    loadCustomer$: Observable<Action> = this.actions$.pipe(
+    loadEmployees$: Observable<Action> = this.actions$.pipe(
         ofType<employeeActions.LoadEmployees>(
             employeeActions.EmployeeActionsType.LOAD_EMPLOYEES
         ),
-        mergeMap((actions: employeeActions.LoadEmployees) => 
+        mergeMap((actions: employeeActions.LoadEmployees) =>
             this.employeeService.getEmployee().pipe(
                 map(
-                    (employees: IEmployee[]) => 
-                    new employeeActions.LoadEmployeesSuccess(employees)
+                    (employees: IEmployee[]) =>
+                        new employeeActions.LoadEmployeesSuccess(employees)
                 ),
                 catchError(err => of(new employeeActions.LoadEmployeesFail(err)))
             )
         )
     )
+
+    
 }

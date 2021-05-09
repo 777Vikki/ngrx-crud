@@ -1,17 +1,17 @@
 <h5 class="text-primary">Update Employee</h5>
-<form>
+<form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
     <div class="row">
         <div class="col-3">
-            <input type="text" class="form-control" id="email" aria-describedby="emailHelp">
+            <input type="text" class="form-control" formControlName="email" id="email" placeholder="Email" aria-describedby="emailHelp">
         </div>
         <div class="col-3">
-            <input type="text" class="form-control" id="first_name" aria-describedby="emailHelp">
+            <input type="text" class="form-control" formControlName="first_name" id="first_name" placeholder="First Name" aria-describedby="firstNameHelp">
         </div>
         <div class="col-3">
-            <input type="text" class="form-control" id="last_name" aria-describedby="emailHelp">
+            <input type="text" class="form-control" formControlName="last_name" id="last_name" placeholder="Last Name" aria-describedby="lastNameHelp">
         </div>
         <div class="col-3">
-            <button class="btn btn-primary">Update Employee</button>
+            <button class="btn btn-primary" [disabled]="!employeeForm.valid">Update Employee</button>
         </div>
     </div>
 </form>
