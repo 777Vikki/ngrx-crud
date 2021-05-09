@@ -9,7 +9,7 @@ import { EmployeeComponent } from './employee/employee.component';
 import { StoreModule } from '@ngrx/store';
 import { employeeReducer } from './state/employee.reducer';
 import { EffectsModule } from '@ngrx/effects';
-import { CustomerEffect } from './state/customer.effects';
+import { EmployeeEffect } from './state/employee.effects';
 
 @NgModule({
   declarations: [
@@ -22,7 +22,7 @@ import { CustomerEffect } from './state/customer.effects';
     CommonModule,
     EmployeesRoutingModule,
     StoreModule.forFeature("employees", employeeReducer),
-    EffectsModule.forFeature([CustomerEffect])
+    EffectsModule.forFeature([EmployeeEffect])
   ]
 })
 export class EmployeesModule { }

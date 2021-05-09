@@ -6,10 +6,10 @@ import { Action } from "@ngrx/store";
 import { Observable, of } from "rxjs";
 import { map, mergeMap, catchError } from "rxjs/operators";
 import { EmployeeService } from "../employee.service";
-import * as employeeActions from "../state/employee.actions";
+import * as employeeActions from "./employee.actions";
 import { IEmployee } from "../models/employee.model";
 @Injectable()
-export class CustomerEffect {
+export class EmployeeEffect {
     constructor(private actions$: Actions,
         private employeeService: EmployeeService
     ) { }

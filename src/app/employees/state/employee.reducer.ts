@@ -1,17 +1,6 @@
 import * as employeeActions from './employee.actions';
-import { IEmployee } from "../models/employee.model";
-import * as fromRoot from "../../state/app-state";
+import { EmployeeState } from './employee.state';
 
-export interface EmployeeState {
-    employees: IEmployee[]
-    loading: boolean;
-    loaded: boolean;
-    error: string;
-}
-
-export interface AppState extends fromRoot.AppState {
-    employee: EmployeeState;
-}
 
 export const initialState: EmployeeState = {
     employees: [],
@@ -53,3 +42,4 @@ export const employeeReducer = (state = initialState, action: employeeActions.Ac
         }
     }
 }
+
