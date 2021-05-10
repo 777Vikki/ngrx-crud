@@ -1,10 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { select, Store } from '@ngrx/store';
-import { AppState } from '../state/employee.state';
-import * as fromEmployee from '../state/employee.selectors';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IEmployee } from '../models/employee.model';
-import * as employeeActions from '../state/employee.actions';
 @Component({
   selector: 'app-employee-edit',
   templateUrl: './employee-edit.component.html',
@@ -12,15 +8,17 @@ import * as employeeActions from '../state/employee.actions';
 })
 export class EmployeeEditComponent implements OnInit {
   employeeForm = this.createForm();
-  constructor(private store: Store<AppState>, private fb: FormBuilder) { }
+  @Output() updateEmployeeEvent = new EventEmitter<IEmployee>()
+  @Input()
+  set employee(value: IEmployee) {
+    if(value) {
+      this.patchForm(value)
+    }
+  }
+  constructor( private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    this.store.pipe(select(fromEmployee.getCurrentCustomer))
-      .subscribe(d => {
-        if (d) {
-          this.patchForm(d)
-        }
-      });
+    
   }
 
   patchForm(e: IEmployee): void {
@@ -45,9 +43,6 @@ export class EmployeeEditComponent implements OnInit {
 
   onSubmit(): void {
     const updatedEmployee: IEmployee = Object.assign({}, this.employeeForm.value);
-    this.store.dispatch(new employeeActions.UpdateEmployee({
-      id: updatedEmployee.id,
-      changes: updatedEmployee
-    }));
+    this.updateEmployeeEvent.next(updatedEmployee);
   }
 }

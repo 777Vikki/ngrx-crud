@@ -10,7 +10,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let emp of (employees$ | async)">
+        <tr *ngFor="let emp of empList">
             <td>{{emp.email}}</td>
             <td>{{emp.first_name}}</td>
             <td>{{emp.last_name}}</td>

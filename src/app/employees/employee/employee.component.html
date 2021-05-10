@@ -1,5 +1,6 @@
 <div class="container mt-5">
-    <app-employee-add></app-employee-add>
-    <app-employee-edit></app-employee-edit>
-    <app-employee-list></app-employee-list>
+    <app-employee-add (addEmployeeEvent)="addEmployee($event)"></app-employee-add>
+    <app-employee-edit [employee]="loadEmployee" (updateEmployeeEvent)="updateEmployee($event)"></app-employee-edit>
+    <app-employee-list (editIdEvent)="editEmployee($event)" (deleteIdEvent)="deleteEmployee($event)"
+        [empList]="employees$ | async"></app-employee-list>
 </div>

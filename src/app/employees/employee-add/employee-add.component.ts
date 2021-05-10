@@ -1,8 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AppState } from '../state/employee.state';
-import { Store } from '@ngrx/store';
-import * as employeeActions from '../state/employee.actions';
+import { IEmployee } from '../models/employee.model';
 
 @Component({
   selector: 'app-employee-add',
@@ -10,8 +8,9 @@ import * as employeeActions from '../state/employee.actions';
   styleUrls: ['./employee-add.component.css']
 })
 export class EmployeeAddComponent implements OnInit {
+  @Output() addEmployeeEvent = new EventEmitter<IEmployee>();
   employeeForm = this.createForm();
-  constructor(private fb: FormBuilder, private store: Store<AppState>) { }
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
   }
@@ -28,7 +27,7 @@ export class EmployeeAddComponent implements OnInit {
 
   onSubmit(): void {
     const newEmployee = Object.assign({}, this.employeeForm.value, { id: Math.floor(Math.random() * 50000) })
-    this.store.dispatch(new employeeActions.CreateEmployee(newEmployee));
+    this.addEmployeeEvent.next(newEmployee);
   }
 
 }
