@@ -1,27 +1,17 @@
-# NgrxCrud
+Task:
+Below is a task which you need to integrate in angular using the Ngrx Store.
+Create an Employee Store in Ngrx
+get the list of Employees from below API and update the Store with Effects.
+https://reqres.in/api/users?page=1
+Display the list of Employees from the Store
+Create an Employee and the same should reflect in the Store.
+Edit an Employee detail and the same should reflect in the Store.
+Delete an Employee record and the same should reflect in the Store.
+Below is a link about a well know pattern "Facade Pattern", you need to understand the pattern and integrate the above tasks with this pattern.
+https://angular-academy.com/angular-architecture-best-practices/
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.12.
+tutoiral Reference:
+https://www.youtube.com/watch?v=62JNAasgclE&list=PLaMbwDs23r4KXoMucJEyUAvamQ-kFNBvC&index=1
 
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Walkthrough Reference:
+https://ngrx.io/guide/store/walkthrough
