@@ -9,6 +9,8 @@ import { CustomerListComponent } from './customer-list/customer-list.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { customerReducer } from './state/customer.reducer';
+import { EffectsModule, Actions } from '@ngrx/effects';
+import { CustomerEffect } from './state/customer.effects';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import { customerReducer } from './state/customer.reducer';
     CommonModule,
     CustomersRoutingModule,
     ReactiveFormsModule,
-    StoreModule.forFeature('customers', customerReducer)
+    StoreModule.forFeature('customers', customerReducer),
+    EffectsModule.forFeature([CustomerEffect])
   ]
 })
 export class CustomersModule { }

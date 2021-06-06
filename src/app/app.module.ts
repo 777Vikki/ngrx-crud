@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
+import { EffectsModule } from '@ngrx/effects';
 import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
 import {StoreDevtoolsModule  } from '@ngrx/store-devtools';
@@ -20,7 +21,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     AppRoutingModule,
     HttpClientModule,
     StoreDevtoolsModule.instrument(),
-    StoreModule.forRoot({ })
+    StoreModule.forRoot({ }),
+    EffectsModule.forRoot([])
   ],
   providers: [],
   bootstrap: [AppComponent]
