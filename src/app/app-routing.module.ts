@@ -1,9 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   {
-    path: '', redirectTo: 'api-data', pathMatch: 'full'
+    path: '', component: HomeComponent
+  },
+  {
+    path: 'customers', 
+    loadChildren: () => import('./customers/customers.module').then(mod => mod.CustomersModule)
   }
 ];
 
