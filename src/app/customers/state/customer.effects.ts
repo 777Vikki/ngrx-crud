@@ -25,8 +25,8 @@ export class CustomerEffect {
         mergeMap((actions: customerActions.LoadCustomers) =>
             this.customerService.getCustomers().pipe(
                 map((customers: ICustomer[]) => 
-                    new customerActions.LoadCustomersSuccess({customers})),
-                catchError(error => of(new customerActions.LoadCustomersFail({error})))
+                    new customerActions.LoadCustomersSuccess(customers)),
+                catchError(error => of(new customerActions.LoadCustomersFail(error)))
             ))
     )
 }

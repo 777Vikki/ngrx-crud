@@ -4,8 +4,8 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 import * as fromRoot from '../../state/app-state';
 import { EntityState, EntityAdapter, createEntityAdapter } from "@ngrx/entity";
 
-export interface ICustomerState {
-    customers: ICustomer[],
+export interface ICustomerState extends EntityState<ICustomer> {
+    selectedCustomerId: null | number;
     loading: boolean,
     loaded: boolean,
     error: string
@@ -15,12 +15,18 @@ export interface AppState extends fromRoot.AppState {
     customers: ICustomerState
 }
 
-export const initialState: ICustomerState = {
-    customers: [],
+export const customerAdapter: EntityAdapter<ICustomer> = createEntityAdapter<ICustomer>();
+
+export const defaultCustomer: ICustomerState = {
+    ids: [],
+    entities: {},
+    selectedCustomerId: null,
     loading: false,
     loaded: false,
-    error: '',
+    error: ''
 }
+
+export const initialState = customerAdapter.getInitialState(defaultCustomer)
 
 export function customerReducer(state = initialState, action: customerActions.Actions): ICustomerState {
     switch(action.type) {
@@ -32,21 +38,20 @@ export function customerReducer(state = initialState, action: customerActions.Ac
         }
 
         case customerActions.CustomerActionType.LOAD_CUSTOMERS_SUCCESS: {
-            return {
+            return customerAdapter.addMany(action.payload, {
                 ...state,
                 loading: false,
-                loaded: true,
-                customers: action.payload.customers
-            }
+                loaded: true
+            })
         }
 
         case customerActions.CustomerActionType.LOAD_CUSTOMERS_FAIL: {
             return {
                 ...state,
-                customers: [],
+                entities: {},
                 loading: false,
                 loaded: false,
-                error: action.payload.error
+                error: action.payload
             }
         }
 
@@ -64,7 +69,7 @@ const getCustomerFeatureState = createFeatureSelector<ICustomerState>(
   
   export const getCustomers = createSelector(
     getCustomerFeatureState,
-    (state: ICustomerState) => state.customers
+    customerAdapter.getSelectors().selectAll
   );
   
   export const getCustomersLoading = createSelector(

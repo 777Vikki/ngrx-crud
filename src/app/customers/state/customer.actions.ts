@@ -14,13 +14,13 @@ export class LoadCustomers implements Action {
 export class LoadCustomersSuccess implements Action {
     readonly type = CustomerActionType.LOAD_CUSTOMERS_SUCCESS;
     
-    constructor(public payload: {customers: ICustomer[]}){}
+    constructor(public payload: ICustomer[]){}
 }
 
 export class LoadCustomersFail implements Action {
     readonly type = CustomerActionType.LOAD_CUSTOMERS_FAIL;
     
-    constructor(public payload: {error: string}){}
+    constructor(public payload: string){}
 }
 
 export type Actions = 
