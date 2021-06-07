@@ -18,11 +18,13 @@ export class CustomerListComponent implements OnInit {
     this.customers$ = this.store.pipe(select(fromCustomer.getCustomers))
   }
 
-  editCustomer(customer) {
-
+  deleteCustomer(customer: ICustomer) {
+    if (confirm("Are You Sure You want to Delete the User?")) {
+      this.store.dispatch(new customerActions.DeleteCustomer(customer.id));
+    }
   }
 
-  deleteCustomer(customer) {
-    
+  editCustomer(customer: ICustomer) {
+    this.store.dispatch(new customerActions.LoadCustomer(customer.id));
   }
 }

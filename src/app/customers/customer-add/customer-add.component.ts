@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { ICustomer } from '../models/customer.model';
+import * as fromCustomer from "../state/customer.reducer";
+import * as customerActions from "../state/customer.actions";
 
 @Component({
   selector: 'app-customer-add',
@@ -11,6 +15,7 @@ export class CustomerAddComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    private store: Store<fromCustomer.AppState>
   ) {}
 
   ngOnInit() {
@@ -23,7 +28,16 @@ export class CustomerAddComponent implements OnInit {
   }
 
   createCustomer() {
-    console.log(this.customerForm.value)
+    const newCustomer: ICustomer = {
+      name: this.customerForm.get("name").value,
+      phone: this.customerForm.get("phone").value,
+      address: this.customerForm.get("address").value,
+      membership: this.customerForm.get("membership").value
+    };
+
+    this.store.dispatch(new customerActions.CreateCustomer(newCustomer));
+
+    this.customerForm.reset();
   }
 
 }
